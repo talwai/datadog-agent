@@ -51,9 +51,9 @@ func tearDown() {
 	os.Remove(tmpfile.Name())
 }
 
-func getVersion() string {
-	ret := C.GoString(C.get_py_version(six))
-	return ret
+func getPyInfo() (string, string) {
+	info := C.get_py_info(six)
+	return C.GoString(info.version), C.GoString(info.path)
 }
 
 func runString(code string) (string, error) {
